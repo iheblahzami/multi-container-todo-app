@@ -1,0 +1,13 @@
+node_modules/
+.env
+
+.terraform/
+*.tfstate
+*.tfstate.backup
+
+.vscode/
+.idea/
+
+*.log
+
+ansible/inventory.ini
