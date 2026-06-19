@@ -5,6 +5,7 @@ https://roadmap.sh/projects/multi-container-service
 A production-ready Todo API built with Node.js, Express, and MongoDB, deployed on Microsoft Azure using Terraform, Ansible, Docker Compose, and GitHub Actions.
 
 Architecture
+
 GitHub
    |
    | Push to main
@@ -24,6 +25,8 @@ Azure VM
    +--> Node.js API Container (Port 3000)
    |
    +--> MongoDB Container
+
+   
 Technologies Used
 Technology	Purpose
 Node.js + Express	REST API
@@ -36,7 +39,10 @@ Ansible	Server configuration
 GitHub Actions	CI/CD pipeline
 Azure VM	Hosting
 Nginx	Reverse proxy
+
+
 Features
+
 Todo API
 Method	Endpoint	Description
 GET	/todos	Get all todos
