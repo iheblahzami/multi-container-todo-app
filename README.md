@@ -1,74 +1,119 @@
-Multi-Container Todo Application
+
 
 https://roadmap.sh/projects/multi-container-service
 
-A production-ready Todo API built with Node.js, Express, and MongoDB, deployed on Microsoft Azure using Terraform, Ansible, Docker Compose, and GitHub Actions.
 
-Architecture
+# 🚀 Multi-Container Todo Application on Azure
 
-GitHub
-   |
-   | Push to main
-   v
-GitHub Actions
-   |
-   | Build & Push Docker Image
-   v
-Docker Hub
-   |
-   | Deploy
-   v
-Azure VM
-   |
-   +--> Nginx Reverse Proxy (Port 80)
-   |
-   +--> Node.js API Container (Port 3000)
-   |
-   +--> MongoDB Container
+![Node.js](https://img.shields.io/badge/Node.js-20-green)
+![Docker](https://img.shields.io/badge/Docker-Compose-blue)
+![MongoDB](https://img.shields.io/badge/MongoDB-7-green)
+![Terraform](https://img.shields.io/badge/Terraform-IaC-purple)
+![Ansible](https://img.shields.io/badge/Ansible-Automation-red)
+![GitHub Actions](https://img.shields.io/badge/GitHub-Actions-black)
+![Azure](https://img.shields.io/badge/Microsoft-Azure-0078D4)
 
-   
-Technologies Used
+A production-ready Todo REST API built with **Node.js**, **MongoDB**, and **Docker Compose**, deployed automatically to an **Azure Virtual Machine** using **Terraform**, **Ansible**, and **GitHub Actions**.
 
-Technology	Purpose
-Node.js + Express	REST API
-MongoDB	Database
-Mongoose	MongoDB ODM
-Docker	Containerization
-Docker Compose	Multi-container orchestration
-Terraform	Infrastructure provisioning
-Ansible	Server configuration
-GitHub Actions	CI/CD pipeline
-Azure VM	Hosting
-Nginx	Reverse proxy
+---
 
+## 📌 Overview
 
-Features
+This project demonstrates a complete DevOps workflow:
 
-Todo API
-Method	Endpoint	Description
-GET	/todos	Get all todos
-POST	/todos	Create todo
-GET	/todos/:id	Get single todo
-PUT	/todos/:id	Update todo
-DELETE	/todos/:id	Delete todo
+- Develop a containerized Node.js application
+- Provision infrastructure with Terraform
+- Configure servers using Ansible
+- Deploy containers with Docker Compose
+- Automate deployments through GitHub Actions
+- Expose services through an Nginx reverse proxy
 
+---
 
-Project Structure
+## 🏗️ Architecture
 
+```text
+┌───────────────────┐
+│      GitHub       │
+└─────────┬─────────┘
+          │ Push
+          ▼
+┌───────────────────┐
+│ GitHub Actions    │
+│ CI/CD Pipeline    │
+└─────────┬─────────┘
+          │
+          ▼
+┌───────────────────┐
+│    Docker Hub     │
+└─────────┬─────────┘
+          │ Pull Image
+          ▼
+┌──────────────────────────────────────┐
+│              Azure VM                │
+│                                      │
+│  ┌──────────────┐                    │
+│  │    Nginx     │ Port 80            │
+│  └──────┬───────┘                    │
+│         │                            │
+│         ▼                            │
+│  ┌──────────────┐                    │
+│  │  Node.js API │ Port 3000          │
+│  └──────┬───────┘                    │
+│         │                            │
+│         ▼                            │
+│  ┌──────────────┐                    │
+│  │   MongoDB    │                    │
+│  └──────────────┘                    │
+└──────────────────────────────────────┘
+```
 
-multi-container-todo-app
+---
+
+## ✨ Features
+
+### REST API
+
+| Method | Endpoint | Description |
+|----------|----------|-------------|
+| GET | `/todos` | Retrieve all todos |
+| POST | `/todos` | Create a todo |
+| GET | `/todos/:id` | Retrieve a todo |
+| PUT | `/todos/:id` | Update a todo |
+| DELETE | `/todos/:id` | Delete a todo |
+
+### Infrastructure
+
+- Azure Virtual Machine
+- Virtual Network
+- Public IP Address
+- Network Security Groups
+- Terraform Infrastructure as Code
+
+### Automation
+
+- Ansible Configuration Management
+- Docker Compose Deployment
+- GitHub Actions Continuous Deployment
+
+---
+
+## 📂 Project Structure
+
+```text
+multi-container-todo-app/
 │
 ├── api/
-│   ├── Dockerfile
+│   ├── models/
+│   ├── routes/
 │   ├── package.json
 │   ├── server.js
-│   ├── models/
-│   └── routes/
+│   └── Dockerfile
 │
 ├── terraform/
 │   ├── main.tf
-│   ├── variables.tf
-│   └── outputs.tf
+│   ├── outputs.tf
+│   └── variables.tf
 │
 ├── ansible/
 │   ├── inventory.ini
@@ -82,135 +127,214 @@ multi-container-todo-app
 │       └── deploy.yml
 │
 └── docker-compose.yml
+```
 
+---
 
+# 🐳 Containerization
 
-The application consists of:
+The application consists of three containers:
 
-API Container
-Node.js
-Express
-Mongoose
-MongoDB Container
-MongoDB 7
-Persistent Docker volume
-Nginx Container
-Reverse proxy
-Exposes port 80
-Infrastructure Provisioning
+| Container | Purpose |
+|------------|----------|
+| Node.js API | Backend service |
+| MongoDB | Database |
+| Nginx | Reverse proxy |
 
-Infrastructure is created using Terraform.
+Docker Compose manages networking and service orchestration.
 
-Resources provisioned:
+---
 
-Virtual Network
-Subnet
-Public IP
-Network Security Group
-Linux Virtual Machine (Ubuntu 22.04)
-Deploy Infrastructure
+# ☁️ Infrastructure Provisioning
+
+Infrastructure is provisioned using Terraform.
+
+## Resources Created
+
+- Resource Group (existing)
+- Virtual Network
+- Subnet
+- Network Security Group
+- Public IP
+- Ubuntu Virtual Machine
+
+### Deploy Infrastructure
+
+```bash
 terraform init
 terraform plan
 terraform apply
-Server Configuration
+```
 
-Ansible is used to configure the VM.
+---
 
-Tasks performed:
+# ⚙️ Server Configuration
 
-Install Docker
-Install Docker Compose
-Enable Docker service
-Configure Docker permissions
-Copy Docker Compose configuration
-Copy Nginx configuration
-Pull Docker images
-Start containers
-Run Ansible
+Ansible automatically configures the VM:
+
+- Docker installation
+- Docker Compose installation
+- Docker service configuration
+- User permissions
+- Application deployment
+- Container startup
+
+### Run Playbook
+
+```bash
 ansible-playbook -i inventory.ini playbook.yml
-CI/CD Pipeline
+```
 
-GitHub Actions automates deployment.
+---
 
-Pipeline steps:
+# 🔄 CI/CD Pipeline
 
-Checkout repository
-Login to Docker Hub
-Build Docker image
-Push image to Docker Hub
+The deployment process is fully automated.
+
+### Workflow
+
+```text
+Developer Push
+      │
+      ▼
+GitHub Actions
+      │
+      ▼
+Build Docker Image
+      │
+      ▼
+Push to Docker Hub
+      │
+      ▼
 SSH into Azure VM
-Pull latest image
-Restart containers
-Trigger
+      │
+      ▼
+docker compose pull
+docker compose up -d
+```
 
-Deployment is automatically triggered when code is pushed to:
+### Trigger
 
-main
-GitHub Secrets
+```yaml
+on:
+  push:
+    branches:
+      - main
+```
 
-Required secrets:
+---
 
-Secret	Description
-DOCKER_USERNAME	Docker Hub username
-DOCKER_PASSWORD	Docker Hub access token
-SERVER_IP	Azure VM public IP
-SSH_KEY	Private SSH key
-Reverse Proxy
+# 🌐 Reverse Proxy
 
-Nginx is configured as a reverse proxy.
+Nginx acts as the public entry point.
 
-Internet
-   |
- Port 80
-   |
- Nginx
-   |
- Node.js API
-   |
- MongoDB
+### Before
+
+```text
+http://SERVER_IP:3000/todos
+```
+
+### After
+
+```text
+http://SERVER_IP/todos
+```
 
 Benefits:
 
-Single public entry point
-Cleaner URLs
-Easier SSL integration
-Persistence
+- Cleaner URLs
+- Single entry point
+- Easier SSL integration
+- Better scalability
 
-MongoDB data is stored in a Docker volume.
+---
 
+# 💾 Persistent Storage
+
+MongoDB data is stored using Docker volumes.
+
+```yaml
 volumes:
   mongo_data:
+```
 
-This ensures data remains available after:
+Data remains available after:
 
-Container restart
-Docker restart
-VM reboot
-API Testing
+- Container restart
+- Docker restart
+- VM reboot
 
-Create Todo:
+---
 
-curl -X POST http://<server-ip>/todos \
+# 🧪 API Examples
+
+### Create Todo
+
+```bash
+curl -X POST http://SERVER_IP/todos \
 -H "Content-Type: application/json" \
 -d '{"title":"Learn Docker"}'
+```
 
-Get Todos:
+### Get Todos
 
-curl http://<server-ip>/todos
-Lessons Learned
+```bash
+curl http://SERVER_IP/todos
+```
 
-This project demonstrates:
+### Update Todo
 
-Containerization with Docker
-Multi-container applications with Docker Compose
-Infrastructure as Code using Terraform
-Configuration Management using Ansible
-CI/CD using GitHub Actions
-Cloud deployment on Azure
-Reverse proxy configuration with Nginx
-Future Improvements
-HTTPS with Let's Encrypt
-Custom domain name
-Monitoring with Prometheus and Grafana
-Container registry migration to Azure Container Registry
-Kubernetes deployment
+```bash
+curl -X PUT http://SERVER_IP/todos/<id>
+```
+
+### Delete Todo
+
+```bash
+curl -X DELETE http://SERVER_IP/todos/<id>
+```
+
+---
+
+# 🔐 GitHub Secrets
+
+Required repository secrets:
+
+| Secret | Description |
+|----------|-------------|
+| DOCKER_USERNAME | Docker Hub username |
+| DOCKER_PASSWORD | Docker Hub access token |
+| SERVER_IP | Azure VM public IP |
+| SSH_KEY | Private SSH key |
+
+---
+
+# 🎯 Learning Outcomes
+
+Through this project I gained hands-on experience with:
+
+- Docker & Docker Compose
+- Infrastructure as Code (Terraform)
+- Configuration Management (Ansible)
+- CI/CD Automation (GitHub Actions)
+- Azure Cloud Infrastructure
+- Reverse Proxy Configuration (Nginx)
+- Production-style Application Deployment
+
+---
+
+# 🚀 Future Improvements
+
+- HTTPS with Let's Encrypt
+- Azure Container Registry (ACR)
+- Monitoring with Prometheus & Grafana
+- Logging with ELK Stack
+- Kubernetes Deployment
+- Blue/Green Deployments
+
+---
+
+## 👨‍💻 Author
+
+**Iheb**
+DevOps & Cloud Engineering Project
