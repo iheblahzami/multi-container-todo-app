@@ -58,9 +58,25 @@
         group: azureuser
         mode: "0755"
 
+    - name: Create nginx directory
+      file:
+        path: /opt/todo/nginx
+        state: directory
+        owner: azureuser
+        group: azureuser
+        mode: "0755"
+
+    - name: Copy nginx config
+      copy:
+        src: ../nginx/nginx.conf
+        dest: /opt/todo/nginx/nginx.conf
+        owner: azureuser
+        group: azureuser
+        mode: "0644"
+
     - name: Copy docker-compose file
       copy:
-        src: docker-compose.yml
+        src: ../docker-compose.yml
         dest: /opt/todo/docker-compose.yml
         owner: azureuser
         group: azureuser
