@@ -28,6 +28,7 @@ Azure VM
 
    
 Technologies Used
+
 Technology	Purpose
 Node.js + Express	REST API
 MongoDB	Database
@@ -54,8 +55,8 @@ DELETE	/todos/:id	Delete todo
 
 Project Structure
 
-multi-container-todo-app
 
+multi-container-todo-app
 │
 ├── api/
 │   ├── Dockerfile
@@ -82,7 +83,7 @@ multi-container-todo-app
 │
 └── docker-compose.yml
 
-Docker Compose
+
 
 The application consists of:
 
