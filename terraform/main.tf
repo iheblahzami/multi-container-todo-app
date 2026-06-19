@@ -1,6 +1,6 @@
 #ressource group
 data "azurerm_resource_group" "rg" {
-  name = "kml_rg_main-1880758462304ced"
+  name = "kml_rg_main-62d18f9945a546fd"
 }
 
 
