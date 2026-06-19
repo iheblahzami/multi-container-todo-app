@@ -55,6 +55,7 @@ DELETE	/todos/:id	Delete todo
 Project Structure
 
 multi-container-todo-app
+
 │
 ├── api/
 │   ├── Dockerfile
