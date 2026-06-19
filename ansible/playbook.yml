@@ -7,6 +7,7 @@
     - name: Update apt cache
       apt:
         update_cache: yes
+        cache_valid_time: 3600
 
     - name: Install required packages
       apt:
@@ -15,25 +16,30 @@
           - git
           - curl
         state: present
-        update_cache: yes
 
-    - name: Enable Docker
+    - name: Enable and start Docker
       service:
         name: docker
         enabled: yes
         state: started
 
+    - name: Add azureuser to docker group
+      user:
+        name: azureuser
+        groups: docker
+        append: yes
+
     - name: Create Docker CLI plugins directory
       file:
         path: /usr/local/lib/docker/cli-plugins
         state: directory
-        mode: '0755'
+        mode: "0755"
 
     - name: Install Docker Compose v2
       get_url:
         url: https://github.com/docker/compose/releases/download/v2.27.0/docker-compose-linux-x86_64
         dest: /usr/local/lib/docker/cli-plugins/docker-compose
-        mode: '0755'
+        mode: "0755"
 
     - name: Verify Docker Compose installation
       command: docker compose version
@@ -48,14 +54,19 @@
       file:
         path: /opt/todo
         state: directory
-        mode: '0755'
+        owner: azureuser
+        group: azureuser
+        mode: "0755"
 
-    - name: Copy compose file
+    - name: Copy docker-compose file
       copy:
         src: docker-compose.yml
         dest: /opt/todo/docker-compose.yml
+        owner: azureuser
+        group: azureuser
+        mode: "0644"
 
-    - name: Pull containers
+    - name: Pull Docker images
       command:
         cmd: docker compose pull
         chdir: /opt/todo
